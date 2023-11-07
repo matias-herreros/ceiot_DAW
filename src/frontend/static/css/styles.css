@@ -8,3 +8,19 @@ body {
 main {
     flex: 1 0 auto;
 }
+
+
+.textoError{
+    width: 50%;
+    margin: auto;
+    font-size: x-small;
+    text-align: center;
+    color: red;
+    border: solid 5px chocolate;
+}
+.textoCorrecto{
+    font-size: x-small;
+    text-align: center;
+    color: rgb(71, 161, 73);
+
+}

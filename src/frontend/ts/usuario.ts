@@ -9,7 +9,7 @@ class Usuario{
       this.rol = rol;
   }
 
-  mostrar():string {
+  public mostrar():string {
     return `${this.nombre} - ${this.rol}`; 
   }
 }
