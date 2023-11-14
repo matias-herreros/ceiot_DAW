@@ -29,6 +29,13 @@ app.get('/devices/', function(req, res, next) {
             'state': 1, 
             'type': 2, 
         },
+        { 
+            'id': 3, 
+            'name': 'TV', 
+            'description': 'TV led Habitacion', 
+            'state': 0, 
+            'type': 3, 
+        }
     ]
     res.send(JSON.stringify(devices)).status(200);
 });

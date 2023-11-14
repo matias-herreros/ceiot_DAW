@@ -6,9 +6,34 @@ class Main implements EventListenerObject{
 
     private buscarPersonas() {
 
+   
         for (let u of this.usuarios) {
             console.log(u.mostrar(),this.usuarios.length);
         }
+    }
+    private buscarDevices() {
+        let div = document.getElementById("lista"); 
+        div.innerHTML = "info <h1>TItulo</h1>";
+        let xmlRequest = new XMLHttpRequest();
+        xmlRequest.onreadystatechange = () => {
+     
+            if (xmlRequest.readyState == 4) {
+                if(xmlRequest.status==200){
+                    console.log(xmlRequest.responseText, xmlRequest.readyState);    
+                    let respuesta = xmlRequest.responseText;
+                    let datos:Array<Device> = JSON.parse(respuesta);
+                    
+                    for (let d of datos) {
+                      
+                    }
+                }else{
+                    console.log("no encontre nada");
+                }
+            }
+            
+        }
+        xmlRequest.open("GET","http://localhost:8000/devices",true)
+        xmlRequest.send();
     }
 
     private cargarUsuario(): void{
@@ -38,7 +63,7 @@ class Main implements EventListenerObject{
         
         
         if ("btnListar" == elemento.id) {
-            this.buscarPersonas();
+            this.buscarDevices();
 
             
         } else if ("btnGuardar" == elemento.id) {

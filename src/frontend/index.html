@@ -6,6 +6,7 @@
       <link type="text/css" rel="stylesheet" href="./static/css/styles.css"  media="screen,projection"/>
       <script type="text/javascript" src="./static/js/materialize.min.js"></script>
       <script type="text/javascript" src="js/usuario.js"></script>
+      <script type="text/javascript" src="js/device.js"></script>
       <script type="text/javascript" src="js/main.js"></script>
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
@@ -24,16 +25,24 @@
         
         <main>
             <div class="container">
-                <div >
-                    <h1>Cargar usuario</h1>
-                    <label for="iNombre">Nombre de usuario</label>
-                    <input id="iNombre" type="text" value="" placeholder="jlopez" />
-                    <label for="iPassword">Contraseña</label>
-                    <input id="iPassword" type="password" placeholder="ingrese la contraseña" value="" />
-             
-                    <p id="pInfo"  ></p>
+                <div class="row">
+                   
+                    <div id="lista" class="col s12 m6 l6">
+
+                    </div>
                     
-                    <button id="btnGuardar" class="btn">Guardar</button>
+                    <div class="col s12 m6 l6">
+                        <h1>Cargar usuario</h1>
+                        <label for="iNombre">Nombre de usuario</label>
+                        <input id="iNombre" type="text" value="" placeholder="jlopez" />
+                        <label for="iPassword">Contraseña</label>
+                        <input id="iPassword" type="password" placeholder="ingrese la contraseña" value="" />
+                
+                        <p id="pInfo"  ></p>
+                        
+                        <button id="btnGuardar" class="btn">Guardar</button>
+                    </div>
+                   
                 </div>
              
 
