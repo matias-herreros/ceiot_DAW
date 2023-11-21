@@ -5,6 +5,7 @@
       <link type="text/css" rel="stylesheet" href="./static/css/materialize.min.css"  media="screen,projection"/>
       <link type="text/css" rel="stylesheet" href="./static/css/styles.css"  media="screen,projection"/>
       <script type="text/javascript" src="./static/js/materialize.min.js"></script>
+      <script type="text/javascript" src="js/persona.js"></script>
       <script type="text/javascript" src="js/usuario.js"></script>
       <script type="text/javascript" src="js/device.js"></script>
       <script type="text/javascript" src="js/main.js"></script>
@@ -28,21 +29,56 @@
                 <div class="row">
                    
                     <div id="lista" class="col s12 m6 l6">
+                        <ul class="collection" id="listaDisp">
+                           
+                          
+                          </ul>
+                    </div>
+                     <!-- Modal Trigger -->
+                     <p>
+                        <label>
+                          <input type="checkbox" id="cb"  />
+                          <span>Prender</span>
+                        </label>
+                      </p>
+  <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
 
-                    </div>
-                    
-                    <div class="col s12 m6 l6">
-                        <h1>Cargar usuario</h1>
-                        <label for="iNombre">Nombre de usuario</label>
-                        <input id="iNombre" type="text" value="" placeholder="jlopez" />
-                        <label for="iPassword">Contraseña</label>
-                        <input id="iPassword" type="password" placeholder="ingrese la contraseña" value="" />
-                
-                        <p id="pInfo"  ></p>
-                        
-                        <button id="btnGuardar" class="btn">Guardar</button>
-                    </div>
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+        <div class="col s12 m6 l6">
+            <h1>Cargar usuario</h1>
+            <label for="iNombre">Nombre de usuario</label>
+            <input id="iNombre" type="text" value="" placeholder="jlopez" />
+
+            <div class="input-field">
+                <input id="iPassword" type="password" class="validate">
+                <label for="iPassword">Password</label>
+            </div>
+            
+            <p>
+                <label>
+                  <input type="checkbox"  />
+                  <span>Recordar usuario y contraseña</span>
+                </label>
+              </p>
+            <p id="pInfo"  ></p>
+            
+            <button id="btnGuardar" class="modal-close  btn">Guardar</button>
+        </div>
+    </div>
+   
+  </div>
                    
+                    <div class="input-field col s12">
+                        <select>
+                          <option value="" disabled selected>Choose your option</option>
+                          <option value="1">Option 1</option>
+                          <option value="2">Option 2</option>
+                          <option value="3">Option 3</option>
+                        </select>
+                        <label>Materialize Select</label>
+                      </div>
                 </div>
              
 

@@ -1,5 +1,5 @@
 
-
+var M;
 class Main implements EventListenerObject{
     public usuarios: Array<Usuario>= new Array<Usuario>();
   
@@ -12,9 +12,11 @@ class Main implements EventListenerObject{
         }
     }
     private buscarDevices() {
-        let div = document.getElementById("lista"); 
-        div.innerHTML = "info <h1>TItulo</h1>";
+        
+        
+       
         let xmlRequest = new XMLHttpRequest();
+        
         xmlRequest.onreadystatechange = () => {
      
             if (xmlRequest.readyState == 4) {
@@ -23,9 +25,31 @@ class Main implements EventListenerObject{
                     let respuesta = xmlRequest.responseText;
                     let datos:Array<Device> = JSON.parse(respuesta);
                     
+                    let ul = document.getElementById("listaDisp"); 
+
                     for (let d of datos) {
+                        
+                        ul.innerHTML +=
+                        ` <li class="collection-item avatar">
+                        <img src="images/yuna.jpg" alt="" class="circle">
+                        <span class="title">${d.name}</span>
+                        <p>
+                         ${d.description}
+                        </p>
+                        <a href="#!" class="secondary-content">
+                        <div class="switch">
+                        <label>
+                          Off
+                          <input type="checkbox"  >
+                          <span class="lever"></span>
+                          On
+                        </label>
+                      </div>
+                        </a>
+                      </li>`
                       
                     }
+                    
                 }else{
                     console.log("no encontre nada");
                 }
@@ -36,12 +60,36 @@ class Main implements EventListenerObject{
         xmlRequest.send();
     }
 
+    private ejecutarPost() {
+        let xmlRequest = new XMLHttpRequest();
+
+        xmlRequest.onreadystatechange = () => {
+            if (xmlRequest.readyState == 4) {
+                if (xmlRequest.status == 200) {
+                    console.log("llego resputa",xmlRequest.responseText);        
+                } else {
+                    alert("Salio mal la consulta");
+                }
+            }
+            
+            
+
+        }
+        
+        xmlRequest.open("POST", "http://localhost:8000/device", true)
+        xmlRequest.setRequestHeader("Content-Type", "application/json");
+        let s = {
+            name: "",
+        description:"descripcion"    };
+        xmlRequest.send(JSON.stringify(s));
+    }
+
     private cargarUsuario(): void{
         let iNombre =<HTMLInputElement> document.getElementById("iNombre");
         let iPassword = <HTMLInputElement>document.getElementById("iPassword");
         let pInfo = document.getElementById("pInfo");
         if (iNombre.value.length > 3 && iPassword.value.length > 3) {
-            let usuari1: Usuario = new Usuario(iNombre.value, "user", iPassword.value);
+            let usuari1: Usuario = new Usuario(iNombre.value, "user", iPassword.value,23);
             this.usuarios.push(usuari1);
             iNombre.value = "";
             iPassword.value = "";
@@ -68,13 +116,23 @@ class Main implements EventListenerObject{
             
         } else if ("btnGuardar" == elemento.id) {
             this.cargarUsuario();
+        } else if ("cb" == elemento.id) {
+            let checkbox = <HTMLInputElement>elemento;
+            console.log(checkbox.checked);
+            this.ejecutarPost();
         }
+
     }
 
 }
 
     
 window.addEventListener("load", () => {
+
+    var elems = document.querySelectorAll('select');
+    M.FormSelect.init(elems, "");
+    var elemsModal = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elemsModal, "");
 
     let main1: Main = new Main();
     let boton = document.getElementById("btnListar");
@@ -84,6 +142,8 @@ window.addEventListener("load", () => {
     let botonGuardar = document.getElementById("btnGuardar");
     botonGuardar.addEventListener("click",main1);
 
+    let checkbox = document.getElementById("cb");
+    checkbox.addEventListener("click", main1);
     
 
 
