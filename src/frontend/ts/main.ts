@@ -13,8 +13,6 @@ class Main implements EventListenerObject{
     }
     private buscarDevices() {
         
-        
-       
         let xmlRequest = new XMLHttpRequest();
         
         xmlRequest.onreadystatechange = () => {
@@ -28,10 +26,9 @@ class Main implements EventListenerObject{
                     let ul = document.getElementById("listaDisp"); 
 
                     for (let d of datos) {
-                        
-                        ul.innerHTML +=
-                        ` <li class="collection-item avatar">
-                        <img src="images/yuna.jpg" alt="" class="circle">
+                        let itemList =
+                            ` <li class="collection-item avatar">
+                        <img src="./static/images/lightbulb.png" alt="" class="circle">
                         <span class="title">${d.name}</span>
                         <p>
                          ${d.description}
@@ -40,16 +37,29 @@ class Main implements EventListenerObject{
                         <div class="switch">
                         <label>
                           Off
-                          <input type="checkbox"  >
+                          <input type="checkbox"`;
+                          itemList +=`nuevoAtt="${d.id}" id="cb_${d.id}"`
+                        if (d.state) {
+                            itemList+= ` checked `
+                        }
+                        
+                        itemList+= `>
                           <span class="lever"></span>
                           On
                         </label>
                       </div>
                         </a>
                       </li>`
-                      
+                       
+                        ul.innerHTML += itemList;
+
                     }
-                    
+                    for (let d of datos) {
+                        let checkbox = document.getElementById("cb_" + d.id);
+
+                        checkbox.addEventListener("click", this);
+                    }
+
                 }else{
                     console.log("no encontre nada");
                 }
@@ -60,7 +70,7 @@ class Main implements EventListenerObject{
         xmlRequest.send();
     }
 
-    private ejecutarPost() {
+    private ejecutarPost(id:number,state:boolean) {
         let xmlRequest = new XMLHttpRequest();
 
         xmlRequest.onreadystatechange = () => {
@@ -76,11 +86,12 @@ class Main implements EventListenerObject{
 
         }
         
+       
         xmlRequest.open("POST", "http://localhost:8000/device", true)
         xmlRequest.setRequestHeader("Content-Type", "application/json");
         let s = {
-            name: "",
-        description:"descripcion"    };
+            id: id,
+            state: state   };
         xmlRequest.send(JSON.stringify(s));
     }
 
@@ -116,10 +127,11 @@ class Main implements EventListenerObject{
             
         } else if ("btnGuardar" == elemento.id) {
             this.cargarUsuario();
-        } else if ("cb" == elemento.id) {
+        } else if (elemento.id.startsWith("cb_")) {
             let checkbox = <HTMLInputElement>elemento;
-            console.log(checkbox.checked);
-            this.ejecutarPost();
+            console.log(checkbox.getAttribute("nuevoAtt"),checkbox.checked, elemento.id.substring(3, elemento.id.length));
+            
+            this.ejecutarPost(parseInt(checkbox.getAttribute("nuevoAtt")),checkbox.checked);
         }
 
     }
