@@ -8,15 +8,15 @@ const findDeviceByIdRepository = async (id) => {
   return await db.query(`SELECT * FROM Devices WHERE id='${id}'`);
 };
 
-const createDeviceRepository = async (name, description, state, type) => {
+const createDeviceRepository = async (device) => {
   return await db.query(
-    `INSERT INTO Devices (name, description, state, type) VALUES ('${name}', '${description}', '${state}', '${type}')`
+    `INSERT INTO Devices (name, description, state, type) VALUES ('${device.name}', '${device.description}', '${device.state}', '${device.type}')`
   );
 };
 
-const updateDeviceRepository = async (id, name, description, state, type) => {
+const updateDeviceRepository = async (device) => {
   return await db.query(
-    `UPDATE Devices SET name='${name}', description='${description}', state='${state}', type='${type}' WHERE id='${id}'`
+    `UPDATE Devices SET name='${device.name}', description='${device.description}', state='${device.state}', type='${device.type}' WHERE id='${device.id}'`
   );
 };
 

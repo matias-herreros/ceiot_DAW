@@ -17,7 +17,7 @@ const findDeviceByIdService = async (id) => {
     throw new Error(`Device with id ${id} not found`);
   }
 
-  return foundDevice;
+  return foundDevice[0];
 };
 
 const createDeviceService = async (name, description, state, type) => {
@@ -32,7 +32,7 @@ const createDeviceService = async (name, description, state, type) => {
   ) {
     throw new Error(`Bad request`);
   }
-  return await createDeviceRepository(name, description, state, type);
+  return await createDeviceRepository({ name, description, state, type });
 };
 
 const updateDeviceService = async (id, name, description, state, type) => {
@@ -53,7 +53,18 @@ const updateDeviceService = async (id, name, description, state, type) => {
     throw new Error(`Bad request`);
   }
 
-  return await updateDeviceRepository(id, name, description, state, type);
+  return await updateDeviceRepository({ id, name, description, state, type });
+};
+
+const updateDeviceStatusService = async (id) => {
+  const device = await findDeviceByIdService(id);
+
+  if (!device) {
+    throw new Error(`Device with ID ${id} not found`);
+  }
+  const state = device.state === 1 ? 0 : 1;
+
+  return await updateDeviceRepository({ ...device, state });
 };
 
 const deleteDeviceService = async (id) => {
@@ -72,4 +83,5 @@ module.exports = {
   createDeviceService,
   updateDeviceService,
   deleteDeviceService,
+  updateDeviceStatusService,
 };

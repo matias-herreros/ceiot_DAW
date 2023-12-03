@@ -6,6 +6,7 @@ const {
   createDeviceService,
   updateDeviceService,
   deleteDeviceService,
+  updateDeviceStatusService,
 } = require("../services/device.service");
 const { logger } = require("../utils/logger.js");
 
@@ -49,9 +50,19 @@ deviceRouter.post("/", async (req, res) => {
   }
 });
 
+deviceRouter.put("/:id/state", async (req, res) => {
+  try {
+    const device = await updateDeviceStatusService(req.params.id);
+    logger.info(`${req.method} ${req.baseUrl}${req.path}`);
+    res.status(200).send(device);
+  } catch (error) {
+    logger.error(error);
+    res.status(400).send(error.message);
+  }
+});
+
 deviceRouter.put("/", async (req, res) => {
   try {
-    console.log(req.body.state);
     const device = await updateDeviceService(
       req.body.id,
       req.body.name,
