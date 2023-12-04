@@ -41,7 +41,7 @@
           <br />
           <h3>Device List</h3>
 
-          <div id="lista" miAtt="true" class="col s12 m6 l12">
+          <div id="lista" miAtt="true" class="col s12 m12 l12">
             <ul class="collection" id="listaDisp"></ul>
           </div>
         </div>
@@ -52,12 +52,6 @@
             href="#modalCreateDevice"
             >Create Device</a
           >
-          <!-- Modal Trigger
-          <a
-            class="waves-effect waves-light btn modal-trigger"
-            href="#modalEditDevice"
-            >Edit Device</a
-          > -->
         </div>
 
         <!-- Modal Structure -->
@@ -81,6 +75,15 @@
                   type="text"
                   value=""
                   placeholder="This is a lamp"
+                />
+              </div>
+              <div class="input-field">
+                <label for="iCreateType">Type</label>
+                <input
+                  id="iCreateType"
+                  type="text"
+                  value=""
+                  placeholder="integer"
                 />
               </div>
               <p id="pInfo"></p>
@@ -116,7 +119,16 @@
                   placeholder="This is a lamp"
                 />
               </div>
-              <p id="pEditInfo"></p>
+              <div class="input-field">
+                <label for="iEditType">Type</label>
+                <input
+                  id="iEditType"
+                  type="text"
+                  value=""
+                  placeholder="integer"
+                />
+              </div>
+              <p id="iEditModalInfo"></p>
               <div class="input-field">
                 <button id="btnEdit" class="btn">Guardar</button>
                 <button id="btnCancelEdit" class="btn">Cancelar</button>
@@ -126,6 +138,7 @@
         </div>
       </div>
     </main>
+
     <!-- Page Footer -->
     <footer class="page-footer" style="background-color: #124580">
       <div class="container">
@@ -143,6 +156,7 @@
         </div>
       </div>
     </footer>
+
     <!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="static/js/materialize.min.js"></script>
     <script type="module" src="js/interfaces/device.interface.js"></script>

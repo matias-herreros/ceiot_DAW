@@ -72,15 +72,21 @@ class Main implements EventListenerObject {
     const iDescription = <HTMLInputElement>(
       document.getElementById("iDescription")
     );
+    const iCreateType = <HTMLInputElement>(
+      document.getElementById("iCreateType")
+    );
+    const pInfo = <HTMLInputElement>document.getElementById("pInfo");
 
-    const pInfo = document.getElementById("pInfo");
-
-    if (iNombre.value.length > 3 && iDescription.value.length > 3) {
+    if (
+      iNombre.value.length > 0 &&
+      iDescription.value.length > 0 &&
+      !isNaN(parseInt(iCreateType.value))
+    ) {
       const device: Partial<Device> = {
         name: iNombre.value,
         description: iDescription.value,
         state: 1,
-        type: 0,
+        type: parseInt(iCreateType.value),
       };
       this.backendRequest(
         "POST",
@@ -92,6 +98,9 @@ class Main implements EventListenerObject {
       );
       iNombre.value = "";
       iDescription.value = "";
+      iCreateType.value = "";
+      pInfo.innerHTML = "";
+
       this.handleModalClose("modalCreateDevice");
       this.refreshDeviceList();
     } else {
@@ -116,14 +125,22 @@ class Main implements EventListenerObject {
     const iEditDescription = <HTMLInputElement>(
       document.getElementById("iEditDescription")
     );
+    const iEditType = <HTMLInputElement>document.getElementById("iEditType");
+    const iEditModalInfo = document.getElementById("iEditModalInfo");
+
     const dbId = element.getAttribute("dbId");
     const originalName = document.getElementById(`item_name_${dbId}`).innerHTML;
     const origianlDescription = document.getElementById(
       `item_description_${dbId}`
     ).innerHTML;
+    const originalType = document
+      .getElementById(`item_type_${dbId}`)
+      .getAttribute("typeId");
 
     iEditName.value = originalName;
     iEditDescription.value = origianlDescription;
+    iEditType.value = originalType;
+    iEditModalInfo.innerHTML = "";
 
     iEditName.setAttribute("dbId", `${dbId}`);
   }
@@ -133,12 +150,28 @@ class Main implements EventListenerObject {
     const iEditDescription = <HTMLInputElement>(
       document.getElementById("iEditDescription")
     );
+    const iEditType = <HTMLInputElement>document.getElementById("iEditType");
+    const iEditModalInfo = document.getElementById("iEditModalInfo");
+
+    if (
+      !iEditName.value ||
+      iEditName.value.length === 0 ||
+      !iEditDescription.value ||
+      iEditDescription.value.length === 0 ||
+      isNaN(parseInt(iEditType.value))
+    ) {
+      iEditModalInfo.innerHTML = "Entered data is incorrect";
+      iEditModalInfo.className = "textError";
+      return;
+    }
 
     const device: Partial<Device> = {
       id: parseInt(iEditName.getAttribute("dbId")),
       name: iEditName.value,
       description: iEditDescription.value,
+      type: parseInt(iEditType.value),
     };
+
     this.backendRequest(
       "PUT",
       "device",

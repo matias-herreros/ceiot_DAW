@@ -9,9 +9,17 @@ export const buildItemList = (
       <li class="collection-item avatar">
         <img src="./static/images/lightbulb.png" alt="" class="circle">
         <span class="title" id="item_name_${item.id}">${item.name}</span>
-        <p id="item_description_${item.id}">${item.description}</p>
-        <div class="secondary-content col l3" >
-            <a href="#!" class="col l8">
+        <p class="descriptionBox" id="item_description_${item.id}">${
+      item.description
+    }</p>
+        <div class="infoBox">
+          <p id="item_type_${item.id}" typeId="${item.type}">Type: ${
+      item.type
+    }</p>
+          <p class="idBox" id="item_id_${item.id}">Id: ${item.id}</p>
+        </div>
+        <div class="secondary-content col s8 m6 l4" >
+            <a href="#!" class="col s6 l8">
               <div class="switch">
                   <label>
                     Off
@@ -23,13 +31,13 @@ export const buildItemList = (
                   </label>
               </div>
             </a>
-            <a class="col l2 waves-effect waves-light btn modal-trigger"
+            <a class="col s3 l2 waves-effect waves-light btn modal-trigger"
               href="#modalEditDevice">
                 <i class="material-icons" id="edit_device_${item.id}" dbId="${
       item.id
     }">edit</i>
             </a>
-            <a class="col l2 waves-effect waves-light btn "
+            <a class="col s3 l2 waves-effect waves-light btn "
             href="#!">
               <i class="material-icons" id="delete_device_${item.id}" dbId="${
       item.id
