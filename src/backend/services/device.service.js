@@ -35,25 +35,18 @@ const createDeviceService = async (name, description, state, type) => {
   return await createDeviceRepository({ name, description, state, type });
 };
 
-const updateDeviceService = async (id, name, description, state, type) => {
+const updateDeviceService = async (id, name, description) => {
   const device = await findDeviceByIdService(id);
 
   if (!device) {
     throw new Error(`Device with ID ${id} not found`);
   }
 
-  if (
-    !name ||
-    !description ||
-    state === null ||
-    state === undefined ||
-    type === null ||
-    type === undefined
-  ) {
+  if (!name || !description) {
     throw new Error(`Bad request`);
   }
 
-  return await updateDeviceRepository({ id, name, description, state, type });
+  return await updateDeviceRepository({ ...device, name, description });
 };
 
 const updateDeviceStatusService = async (id) => {

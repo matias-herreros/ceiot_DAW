@@ -66,9 +66,7 @@ deviceRouter.put("/", async (req, res) => {
     const device = await updateDeviceService(
       req.body.id,
       req.body.name,
-      req.body.description,
-      req.body.state,
-      req.body.type
+      req.body.description
     );
     logger.info(`${req.method} ${req.baseUrl}${req.path}`);
     res.status(200).send(device);
