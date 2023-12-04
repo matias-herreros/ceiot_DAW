@@ -35,7 +35,7 @@ const createDeviceService = async (name, description, state, type) => {
   return await createDeviceRepository({ name, description, state, type });
 };
 
-const updateDeviceService = async (id, name, description) => {
+const updateDeviceService = async (id, name, description, type) => {
   const device = await findDeviceByIdService(id);
 
   if (!device) {
@@ -46,7 +46,12 @@ const updateDeviceService = async (id, name, description) => {
     throw new Error(`Bad request`);
   }
 
-  return await updateDeviceRepository({ ...device, name, description });
+  return await updateDeviceRepository({
+    ...device,
+    name,
+    description,
+    type: parseInt(type),
+  });
 };
 
 const updateDeviceStatusService = async (id) => {
