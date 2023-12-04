@@ -6,7 +6,7 @@ services:
     volumes:
       - ./src/frontend/ts:/workspace
       - ./src/frontend/js:/output
-    command: "tsc --project /workspace --outDir /output --watch --pretty true"
+    command: "tsc --watch true --project /workspace --outDir /output --pretty true"
 
   mysql-server:
     platform: linux/x86_64
