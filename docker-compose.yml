@@ -34,7 +34,7 @@ services:
       - "8001:80"
 
   node-backend:
-    image: abassi/nodejs-server:10.0-dev
+    image: mherreros/desarrollo_aplicaiones_web:latest
     volumes:
       - ./src/backend:/home/node/app/src
       - ./src/frontend:/home/node/app/static
