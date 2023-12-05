@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
   - Adds functionality to edit devices' state
   - Adds functionality to delete devices
   - Adds multiple data validators
+  - Created a new node image that includes dotenv and log4js libraries
 
 ## 2.2.0
 
